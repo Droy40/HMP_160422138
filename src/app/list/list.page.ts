@@ -4,7 +4,7 @@ interface Product {
   productName: string,
   productDate: Date,
   productPrice: number,
-}
+} 
 
 @Component({
   selector: 'app-list',
@@ -18,8 +18,14 @@ export class ListPage implements OnInit {
   is5daysago: boolean;
   is5dayslater: boolean;
   numberclicked: number;
-  quantity:number;  
-  totalAmount:number;
+  quantity: number;
+  totalAmount: number;
+
+  couponcode: string;
+  strvalid: string;
+  discountCoupon: number;
+
+  textColor: string;
 
   product: Product = {
     productName: 'Iphone 14',
@@ -27,14 +33,56 @@ export class ListPage implements OnInit {
     productPrice: 14000000,
   }
 
+  books = [
+    {
+      title: 'To Kill a Mockingbird',
+      author: 'Harper Lee',
+      publishedDate: new Date('1960-07-11'),
+      price: 7.99,
+      discount: 5,
+      getPriceAfterDiscount():number{
+        return this.price * (1 - (this.discount/100));
+      }
+      
+    },
+    {
+      title: 'The Great Gatsby',
+      author: 'F. Scott Fitzgerald',
+      publishedDate: new Date('1925-04-10'),
+      price: 10.99,
+      discount:10,
+      getPriceAfterDiscount():number{
+        return this.price * (1 - (this.discount/100));
+      }
+    },
+    {
+      title: 'Pride and Prejudice',
+      author: 'Jane Austen',
+      publishedDate: new Date('1813-01-28'),
+      price: 12.75,
+      discount: 10,
+      getPriceAfterDiscount():number{
+        return this.price * (1 - (this.discount/100));
+      }
+    }
+  ]
+
+
 
   constructor() {
     this.currentDate = new Date();
     this.is5daysago = false;
     this.is5dayslater = false;
     this.numberclicked = 0;
-    this.quantity = 0;    
+    this.quantity = 0;
     this.totalAmount = this.product.productPrice * this.quantity;
+
+    this.couponcode = "0000";
+    this.strvalid = "invalid";
+    this.discountCoupon = 0;
+    this.textColor = "red";
+
+
   }
   ngOnInit() {
   }
@@ -81,21 +129,38 @@ export class ListPage implements OnInit {
     this.is5dayslater = false;
     this.numberclicked = 0;
   }
-  incQuantity(){
+  incQuantity() {
     this.quantity++;
     this.calculateTotalAmount();
   }
-  decQuantity(){            
-   if(this.quantity <= 0){
+  decQuantity() {
+    if (this.quantity <= 0) {
       this.quantity = 0;
-   }
-   else{
-    this.quantity--;
-   }
-   this.calculateTotalAmount();
+    }
+    else {
+      this.quantity--;
+    }
+    this.calculateTotalAmount();
   }
-  calculateTotalAmount(){
+  calculateTotalAmount() {
     this.totalAmount = this.product.productPrice * this.quantity;
+  }
+  checkValid() {
+    if (this.couponcode == "1234") {
+      this.strvalid = "valid";
+      this.discountCoupon = 5;
+      this.textColor = "green";
+    }
+    else if (this.couponcode == "6789") {
+      this.strvalid = "valid";
+      this.discountCoupon = 10;
+      this.textColor = "green";
+    }
+    else {
+      this.strvalid = "invalid";
+      this.discountCoupon = 0;
+      this.textColor = "red";
+    }
   }
 }
 
