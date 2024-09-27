@@ -1,0 +1,75 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Pasta
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+
+    <ion-segment [(ngModel)]="jenistampilan">
+      <ion-segment-button value="accordion">
+        <ion-label>Accordion</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="card">
+        <ion-label>Card</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="grid">
+        <ion-label>Grid</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+
+    <ion-accordion-group expand="inset" *ngIf="jenistampilan=='accordion'">
+      <ion-accordion *ngFor="let pasta of pastas">
+        <ion-item slot="header" color="light">
+          <ion-label>{{pasta.name}}</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-list>
+            <ion-item>
+              <ion-img [src]="pasta.url"></ion-img>
+            </ion-item>
+            <ion-item>{{pasta.description}}</ion-item>
+            <ion-item>Price : {{pasta.price}}</ion-item>
+          </ion-list>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <div id="card-container" *ngIf="jenistampilan=='card'">
+      <ion-card *ngFor="let pasta of pastas">
+        <img alt="Silhouette of mountains" [src]="pasta.url" />
+        <ion-card-header>
+          <ion-card-title>{{pasta.name}}</ion-card-title>
+          <ion-card-subtitle>Price : {{pasta.price}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          {{pasta.description}}
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <ion-grid *ngIf="jenistampilan=='grid'">
+      <ion-row *ngFor="let pastas2 of chunkArray(pastas, 2);let i = index">
+        <ion-col *ngFor="let pasta of pastas2; let i2 = index ">
+          <ion-list>
+            <ion-item>
+              <ion-img [src]="pasta.url"></ion-img>
+            </ion-item>
+            <ion-item routerLink="/pastadetail/{{(i*2)+i2}}">
+              {{pasta.name}}
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+  </div>
+</ion-content>

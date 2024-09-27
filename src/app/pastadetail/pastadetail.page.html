@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>pastadetail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card >
+    <img [src]="pastas[index].url" />
+    <ion-card-header>
+      <ion-card-title>{{pastas[index].name}}</ion-card-title>
+      <ion-card-subtitle>Price : {{pastas[index].price}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      {{pastas[index].description}}
+    </ion-card-content>
+  </ion-card>
+</ion-content>
