@@ -11,7 +11,10 @@
 
 <ion-content [fullscreen]="true">
   <div id="container">
-
+    <ion-button routerLink="/newpasta" expand="full" shape="round">
+      <ion-icon name="add" slot="start"></ion-icon>
+      Add Pasta
+    </ion-button>
     <ion-segment [(ngModel)]="jenistampilan">
       <ion-segment-button value="accordion">
         <ion-label>Accordion</ion-label>
@@ -28,15 +31,21 @@
     <ion-accordion-group expand="inset" *ngIf="jenistampilan=='accordion'">
       <ion-accordion *ngFor="let pasta of pastas">
         <ion-item slot="header" color="light">
-          <ion-label>{{pasta.name}}</ion-label>
+          <ion-label>{{ pasta.name }}</ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
           <ion-list>
             <ion-item>
               <ion-img [src]="pasta.url"></ion-img>
             </ion-item>
-            <ion-item>{{pasta.description}}</ion-item>
-            <ion-item>Price : {{pasta.price}}</ion-item>
+            <ion-item>{{ pasta.description }}</ion-item>
+            <ion-item>Price : {{ pasta.price }}</ion-item>
+            <ion-item *ngIf="pasta.spicy==true">
+              <ion-chip>
+                <ion-icon name="flame-outline"></ion-icon>
+                <ion-label>Spicy</ion-label>
+              </ion-chip>
+            </ion-item>
           </ion-list>
         </div>
       </ion-accordion>
@@ -44,13 +53,19 @@
 
     <div id="card-container" *ngIf="jenistampilan=='card'">
       <ion-card *ngFor="let pasta of pastas">
-        <img alt="Silhouette of mountains" [src]="pasta.url" />
+        <img alt="Silhouette of mountains" [src]="pasta.url"/>
         <ion-card-header>
-          <ion-card-title>{{pasta.name}}</ion-card-title>
-          <ion-card-subtitle>Price : {{pasta.price}}</ion-card-subtitle>
+          <ion-card-title>{{ pasta.name }}</ion-card-title>
+          <ion-card-subtitle>Price : {{ pasta.price }}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-          {{pasta.description}}
+          {{ pasta.description }}
+        </ion-card-content>
+        <ion-card-content *ngIf="pasta.spicy==true">
+          <ion-chip>
+            <ion-icon name="flame-outline"></ion-icon>
+            <ion-label>Spicy</ion-label>
+          </ion-chip>
         </ion-card-content>
       </ion-card>
     </div>
@@ -63,7 +78,7 @@
               <ion-img [src]="pasta.url"></ion-img>
             </ion-item>
             <ion-item routerLink="/pastadetail/{{(i*2)+i2}}">
-              {{pasta.name}}
+              {{ pasta.name }}
             </ion-item>
           </ion-list>
         </ion-col>

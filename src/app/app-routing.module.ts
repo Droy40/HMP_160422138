@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'pastadetail/:index',
     loadChildren: () => import('./pastadetail/pastadetail.module').then( m => m.PastadetailPageModule)
   },
+  {
+    path: 'newpasta',
+    loadChildren: () => import('./newpasta/newpasta.module').then( m => m.NewpastaPageModule)
+  },
 ];
 
 @NgModule({

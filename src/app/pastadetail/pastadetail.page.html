@@ -14,5 +14,11 @@
     <ion-card-content>
       {{pastas[index].description}}
     </ion-card-content>
+    <ion-card-content *ngIf="pastas[index].spicy==true">
+      <ion-chip>
+        <ion-icon name="flame-outline"></ion-icon>
+        <ion-label>Spicy</ion-label>
+      </ion-chip>
+    </ion-card-content>
   </ion-card>
 </ion-content>
