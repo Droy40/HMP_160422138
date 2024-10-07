@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -11,7 +11,7 @@
 
 <ion-content [fullscreen]="true">
   <div id="container">
-    <ion-button routerLink="/newpasta" expand="full" shape="round">
+    <ion-button routerLink="/newpasta" expand="full" shape="round" color="dark">
       <ion-icon name="add" slot="start"></ion-icon>
       Add Pasta
     </ion-button>
@@ -30,7 +30,7 @@
 
     <ion-accordion-group expand="inset" *ngIf="jenistampilan=='accordion'">
       <ion-accordion *ngFor="let pasta of pastas">
-        <ion-item slot="header" color="light">
+        <ion-item slot="header" color="tertiary">
           <ion-label>{{ pasta.name }}</ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
