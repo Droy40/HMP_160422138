@@ -25,7 +25,11 @@ export class PastaPage implements OnInit {
   }
 
   ngOnInit() {
-    this.pastas = this.foodservice.pastas;
+    this.foodservice.pastaList().subscribe(
+      (data)=> {
+        this.pastas=data;
+      }
+    );
   }
 
 }

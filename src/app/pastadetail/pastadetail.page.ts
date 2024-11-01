@@ -9,17 +9,19 @@ import {FoodserviceService} from "../foodservice.service";
 })
 export class PastadetailPage implements OnInit {
 
-  index = 0;
-
-  pastas:any[] = [];
+  pasta:any={};
 
   constructor(private route: ActivatedRoute,private foodservice:FoodserviceService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.index = params['index'];
+      this.foodservice.pastaDetail(params['index']).subscribe(
+        (data)=> {
+          this.pasta=data;
+        }
+      )
     })
-    this.pastas = this.foodservice.pastas;
+
   }
 
 }

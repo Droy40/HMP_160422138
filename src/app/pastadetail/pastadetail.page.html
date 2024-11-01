@@ -6,19 +6,25 @@
 
 <ion-content>
   <ion-card >
-    <img [src]="pastas[index].url" />
+    <img [src]="pasta.url" />
     <ion-card-header>
-      <ion-card-title>{{pastas[index].name}}</ion-card-title>
-      <ion-card-subtitle>Price : {{pastas[index].price}}</ion-card-subtitle>
+      <ion-card-title>{{pasta.name}}</ion-card-title>
+      <ion-card-subtitle>Price : {{pasta.price}}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      {{pastas[index].description}}
+      {{pasta.description}}
+      <ol >
+        <li *ngFor="let ins of pasta.instructions">
+          {{ins.instruction}}
+        </li>
+      </ol>
     </ion-card-content>
-    <ion-card-content *ngIf="pastas[index].spicy==true">
+    <ion-card-content *ngIf="pasta.spicy==true">
       <ion-chip>
         <ion-icon name="flame-outline"></ion-icon>
         <ion-label>Spicy</ion-label>
       </ion-chip>
+      <ion-label>Pasta Recipe Instruction:</ion-label>
     </ion-card-content>
   </ion-card>
 </ion-content>
