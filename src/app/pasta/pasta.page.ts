@@ -7,7 +7,7 @@ import {FoodserviceService} from "../foodservice.service";
   styleUrls: ['./pasta.page.scss'],
 })
 export class PastaPage implements OnInit {
-
+  search:string = "";
   pastas:any[] = [];
 
   jenistampilan: string = "accordion";
@@ -25,7 +25,7 @@ export class PastaPage implements OnInit {
   }
 
   ngOnInit() {
-    this.foodservice.pastaList().subscribe(
+    this.foodservice.pastaList(this.search).subscribe(
       (data)=> {
         this.pastas=data;
       }

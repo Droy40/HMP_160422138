@@ -9,8 +9,8 @@ export class FoodserviceService {
 
   pastas = [];
   link = "https://ubaya.xyz/hybrid/160422138/"
-  pastaList():Observable<any> {
-    return this.http.get(this.link + "pastas.php");
+  pastaList(search:string):Observable<any> {
+    return this.http.get(this.link + "pastas.php?search=" + search);
   }
   addPasta(p_name: string, p_url: string, p_description: string, p_price: number, p_spicy: boolean) {
     // this.pastas.push({name: p_name, url: p_url, description: p_description, price: p_price, spicy: p_spicy})

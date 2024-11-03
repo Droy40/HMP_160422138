@@ -15,6 +15,7 @@
       <ion-icon name="add" slot="start"></ion-icon>
       Add Pasta
     </ion-button>
+    <ion-searchbar [(ngModel)]="search" (ionInput)="ngOnInit()"></ion-searchbar>
     <ion-segment [(ngModel)]="jenistampilan">
       <ion-segment-button value="accordion">
         <ion-label>Accordion</ion-label>
