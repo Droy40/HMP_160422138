@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FoodserviceService} from "../foodservice.service";
 
 @Component({
@@ -7,12 +7,12 @@ import {FoodserviceService} from "../foodservice.service";
   styleUrls: ['./pasta.page.scss'],
 })
 export class PastaPage implements OnInit {
-  search:string = "";
-  pastas:any[] = [];
+  search: string = "";
+  pastas: any[] = [];
 
   jenistampilan: string = "accordion";
 
-  constructor(private foodservice:FoodserviceService) {
+  constructor(private foodservice: FoodserviceService) {
 
   }
 
@@ -24,12 +24,20 @@ export class PastaPage implements OnInit {
     return result;
   }
 
+  ionViewWillEnter() {
+    this.foodservice.pastaList().subscribe((data) => {
+      this.pastas = data;
+    })
+  }
+
+
   ngOnInit() {
     this.foodservice.pastaList(this.search).subscribe(
-      (data)=> {
-        this.pastas=data;
+      (data) => {
+        this.pastas = data;
       }
     );
   }
+
 
 }
