@@ -22,8 +22,18 @@
       </ion-item>
 
       <ion-item>
-        <ion-input [(ngModel)]="new_url" label-placement="floating" label="Image"></ion-input>
-        <ion-img [src]="new_url"></ion-img>
+        <ion-radio-group [(ngModel)]="imageType">
+          <ion-radio value="URL" justify="start" labelPlacement="end">URL</ion-radio>
+          <ion-radio value="Camera" justify="start" labelPlacement="end">Camera</ion-radio>
+        </ion-radio-group>
+      </ion-item>
+      <ion-item *ngIf="imageType=='Camera'">
+        <ion-button (click)="captureImage()">Capture Image</ion-button>
+        <ion-img [src]="base64"/>
+      </ion-item>
+      <ion-item *ngIf="imageType=='URL'">
+        <ion-input [(ngModel)]="new_url" label="URL" labelPlacement="floating"/>
+        <ion-img [src]="new_url"/>
       </ion-item>
 
       <ion-item>
@@ -33,7 +43,10 @@
       </ion-item>
 
       <ion-item>
-        <ion-checkbox [(ngModel)]="new_spicy" labelPlacement="Start"><ion-icon name="flame-outline"></ion-icon>Spicy</ion-checkbox>
+        <ion-checkbox [(ngModel)]="new_spicy" labelPlacement="Start">
+          <ion-icon name="flame-outline"></ion-icon>
+          Spicy
+        </ion-checkbox>
       </ion-item>
 
 

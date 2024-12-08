@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>location</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item>
+      Latitude : {{ lat }}
+    </ion-item>
+    <ion-item>
+      Longitude : {{ lon }}
+    </ion-item>
+  </ion-list>
+  <ion-item>
+    <div id="map"></div>
+  </ion-item>
+
+
+</ion-content>

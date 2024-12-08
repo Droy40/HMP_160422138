@@ -37,6 +37,11 @@
         <div class="ion-padding" slot="content">
           <ion-list>
             <ion-item>
+              <ion-button (click)="addtocart(pasta.id,pasta.name,pasta.price,1)">
+                Add to Cart
+              </ion-button>
+            </ion-item>
+            <ion-item>
               <ion-img [src]="pasta.url"></ion-img>
             </ion-item>
             <ion-item>{{ pasta.description }}</ion-item>

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FoodserviceService} from "../foodservice.service";
 import {Router} from "@angular/router";
+import {Camera, CameraResultType, CameraSource} from "@capacitor/camera";
 
 @Component({
   selector: 'app-newpasta',
@@ -14,6 +15,19 @@ export class NewpastaPage implements OnInit {
   new_url = "";
   new_spicy = false;
   arr_price: number[] = [];
+  base64: any
+  imageType: string = 'URL'
+
+  async captureImage() {
+    const image = await Camera.getPhoto({
+      quality: 50,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Camera,
+    });
+    const base64Image = 'data:image/png;base64,' + image.base64String;
+    this.base64 = base64Image;
+  }
+
   public alertButtons = ['OK']
 
 
@@ -35,6 +49,17 @@ export class NewpastaPage implements OnInit {
 
   submitpasta() {
 //this.foodservice.addPasta(this.new_name,this.new_url,this.new_desc,this.new_price)
+    if (this.imageType == 'Camera') {
+      this.new_url = "https://ubaya.xyz/hybrid/[NRP]/images/" + this.new_name + ".png"
+      this.foodservice.uploadImage(this.new_name, this.base64).subscribe(
+        (response: any) => {
+          if (response.result === 'success') {
+            alert("photo uploaded");
+          }
+        }
+      )
+    }
+
     this.foodservice.addPasta(this.new_name,
       this.new_url, this.new_desc, this.new_price).subscribe((response: any) => {
       if (response.result === 'success') {

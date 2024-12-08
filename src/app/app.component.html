@@ -1,24 +1,6 @@
 <ion-app>
-  <ion-router-outlet id="main-content"></ion-router-outlet>
 
-  <ion-tabs>
-    <ion-tab-bar slot="bottom" color="primary">
-      <ion-tab-button tab="home">
-        <ion-icon name="home"></ion-icon>
-        <ion-label>Home</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button tab="list">
-        <ion-icon name="list"></ion-icon>
-        <ion-label>List</ion-label>
-      </ion-tab-button>
-      <ion-tab-button tab="setting">
-        <ion-icon name="settings"></ion-icon>
-        <ion-label>Setting</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
-  <ion-menu auto-hide="true" content-id="main-content">
+  <ion-menu *ngIf="fullname" auto-hide="true" content-id="main-content">
     <ion-header>
       <ion-toolbar color="primary">
         <ion-title>Menu List</ion-title>
@@ -50,8 +32,60 @@
             <ion-label>Pasta</ion-label>
           </ion-item>
         </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/cart">
+            <ion-icon name="cart-outline"
+                      slot="start"></ion-icon>
+            <ion-label>Cart</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/location">
+            <ion-icon name="location" slot="start"></ion-icon>
+            <ion-label>Location</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-item>
+          <ion-button (click)="logout()">Logout</ion-button>
+        </ion-item>
       </ion-list>
     </ion-content>
+
   </ion-menu>
 
+  <ion-router-outlet *ngIf="fullname" id="main-content"></ion-router-outlet>
+
+  <ion-tabs *ngIf="fullname">
+    <ion-tab-bar slot="bottom" color="primary">
+      <ion-tab-button tab="home">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Home</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="list">
+        <ion-icon name="list"></ion-icon>
+        <ion-label>List</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="setting">
+        <ion-icon name="settings"></ion-icon>
+        <ion-label>Setting</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+
+
+  <ion-content *ngIf="!fullname" class="ion-padding">
+    <img src="https://ubaya.xyz/hybrid/miftah/pasta.jpg"/>
+    <ion-card>
+      <ion-item>
+        <ion-input [(ngModel)]="username" label="Username" labelPlacement="floating"/>
+      </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="password" type="password" label="Password" labelPlacement="floating"/>
+      </ion-item>
+      <ion-button expand="block" (click)="login()">Login</ion-button>
+    </ion-card>
+  </ion-content>
 </ion-app>
+

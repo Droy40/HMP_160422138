@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Pasta
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col>Name</ion-col>
+      <ion-col>Price</ion-col>
+      <ion-col>Num</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of items">
+      <ion-col>{{ item.name }}</ion-col>
+      <ion-col>{{ item.price }}</ion-col>
+      <ion-col>{{ item.num }}</ion-col>
+      <ion-col>{{item.price * item.num}}</ion-col>
+      <ion-col>
+        <ion-button (click)="decreaseNum(item.id)">-</ion-button>
+        <ion-button (click)="increaseNum(item.id)">+</ion-button></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col colspan="3">Grand Total:</ion-col>
+      <ion-col>{{grandTotal}}</ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
